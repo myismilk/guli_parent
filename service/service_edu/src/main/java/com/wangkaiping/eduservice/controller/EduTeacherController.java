@@ -6,18 +6,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wangkaiping.commonutils.R;
 import com.wangkaiping.eduservice.entity.EduTeacher;
 import com.wangkaiping.eduservice.entity.vo.TeacherQuery;
+import com.wangkaiping.eduservice.mapper.EduTeacherMapper;
 import com.wangkaiping.eduservice.service.EduTeacherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <p>
@@ -30,6 +30,7 @@ import java.util.Map;
 @Api(description = "讲师管理")
 @RestController
 @RequestMapping("/eduservice/edu-teacher")
+@CrossOrigin
 public class EduTeacherController {
     @Autowired
     private EduTeacherService eduTeacherService;
@@ -71,18 +72,23 @@ public class EduTeacherController {
                                     @RequestBody(required = false) TeacherQuery teacherQuery){
         Page<EduTeacher> eduTeacherPage = new Page<>(current,limit);
         QueryWrapper<EduTeacher> queryWrapper = new QueryWrapper<>();
-        if(!StringUtils.isEmpty(teacherQuery.getName())){
-            queryWrapper.like("name",teacherQuery.getName());
+        String name = teacherQuery.getName();
+        String level = teacherQuery.getLevel();
+        String begin = teacherQuery.getBegin();
+        String end = teacherQuery.getEnd();
+        if(!StringUtils.isEmpty(name)){
+            queryWrapper.like("name",name);
         }
-        if(!StringUtils.isEmpty(String.valueOf(teacherQuery.getLevel()))){
-            queryWrapper.eq("level",teacherQuery.getLevel());
+        if(!StringUtils.isEmpty(level)){
+            queryWrapper.eq("level",level);
         }
-        if(!StringUtils.isEmpty(teacherQuery.getBegin())){
-            queryWrapper.ge("gmt_create",teacherQuery.getBegin());
+        if(!StringUtils.isEmpty(begin)){
+            queryWrapper.ge("gmt_create",begin);
         }
-        if(!StringUtils.isEmpty(teacherQuery.getEnd())){
-            queryWrapper.le("gmt_create",teacherQuery.getEnd());
+        if(!StringUtils.isEmpty(end)){
+            queryWrapper.le("gmt_create",end);
         }
+        queryWrapper.orderByDesc("gmt_create");
         eduTeacherService.page(eduTeacherPage,queryWrapper);
         long total = eduTeacherPage.getTotal();
         List<EduTeacher> teacherPageRecords = eduTeacherPage.getRecords();
@@ -101,7 +107,7 @@ public class EduTeacherController {
 
     /*根据id查讲师*/
     @ApiOperation("根据id查讲师")
-    @GetMapping("/getTeacherById/{id}")
+    @PostMapping("/getTeacherById/{id}")
     public R getTeacherById(@PathVariable("id") String id){
         EduTeacher eduTeacher = eduTeacherService.getById(id);
         return R.ok().data("teacher",eduTeacher);
