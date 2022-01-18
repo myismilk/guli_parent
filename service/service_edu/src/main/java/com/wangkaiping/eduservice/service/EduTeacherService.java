@@ -1,7 +1,10 @@
 package com.wangkaiping.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wangkaiping.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.HashMap;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduTeacherService extends IService<EduTeacher> {
 
+    HashMap<String, Object> getFrontTeacherByPage(Page<EduTeacher> teacherPage);
 }

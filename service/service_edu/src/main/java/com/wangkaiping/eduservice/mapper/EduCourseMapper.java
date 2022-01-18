@@ -2,6 +2,8 @@ package com.wangkaiping.eduservice.mapper;
 
 import com.wangkaiping.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wangkaiping.eduservice.entity.vo.FrontCourseInfoVo;
+import com.wangkaiping.eduservice.entity.vo.PublicshCourseInfo;
 
 /**
  * <p>
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
+    PublicshCourseInfo getPublishCourseInfo(String courseId);
+
+    FrontCourseInfoVo getFrontCourseInfo(String courseId);
 }

@@ -62,6 +62,10 @@ public class EduTeacherController {
         eduTeacherService.page(eduTeacherPage,null);
         long total = eduTeacherPage.getTotal();
         List<EduTeacher> teacherPageRecords = eduTeacherPage.getRecords();
+        System.out.println(total);
+        for (EduTeacher eduTeacher:teacherPageRecords){
+            System.out.println(eduTeacher);
+        }
         return R.ok().data("total",total).data("teacherPageRecords",teacherPageRecords);
     }
 

@@ -1,14 +1,16 @@
-package com.wangkaiping.eduservice;
+package com.wangkaiping.cmsservice;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.wangkaiping"})
-public class EduApplivation {
+@ComponentScan("com.wangkaiping")
+@MapperScan("com.wangkaiping.cmsservice.mapper")
+public class CmsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(EduApplivation.class,args);
+            SpringApplication.run(CmsApplication.class, args);
     }
 }

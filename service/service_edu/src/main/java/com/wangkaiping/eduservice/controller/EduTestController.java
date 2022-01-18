@@ -1,12 +1,18 @@
 package com.wangkaiping.eduservice.controller;
 
 import com.wangkaiping.commonutils.R;
+import com.wangkaiping.eduservice.client.VdoClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/eduservice/test/user")
 @CrossOrigin
 public class EduTestController {
+
     @PostMapping("login")
     public R logintest(){
         return R.ok().data("token","admin");
