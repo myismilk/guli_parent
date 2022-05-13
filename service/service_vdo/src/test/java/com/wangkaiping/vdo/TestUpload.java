@@ -6,8 +6,8 @@ import com.aliyun.vod.upload.resp.UploadFileStreamResponse;
 
 public class TestUpload {
     public static void main(String[] args) {
-        String accessKeyId = "LTAI5tAh4vkdBoReBweL7kZS";
-        String accessKeySecret = "q9GcvBeZj9y7FDekyjh5k1aXLBpgVo";
+        String accessKeyId = "";
+        String accessKeySecret = "";
         String title = "小视频";
         String fileName = "C:\\1awangkaipingoffile\\java\\移过来的东西\\1-阿里云上传测试视频\\6 - What If I Want to Move Faster.mp4";
         UploadFileStreamRequest request = new UploadFileStreamRequest(accessKeyId, accessKeySecret, title, fileName);
